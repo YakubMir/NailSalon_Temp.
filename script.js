@@ -105,30 +105,51 @@ document.querySelectorAll('.service-card, .gallery-item').forEach(el => {
 // Mobile menu toggle
 function initMobileMenu() {
     const navMenu = document.querySelector('.nav-menu');
-    const navbar = document.querySelector('.navbar-container');
-    
-    // Create hamburger menu if screen is small
+
     if (window.innerWidth <= 768) {
         if (!document.querySelector('.hamburger')) {
             const hamburger = document.createElement('button');
             hamburger.classList.add('hamburger');
+            hamburger.setAttribute('aria-label', 'Open menu');
             hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-            
-            // Insert before nav-menu
             navMenu.parentNode.insertBefore(hamburger, navMenu);
-            
+
+            navMenu.style.display = 'none';
+
             hamburger.addEventListener('click', function() {
-                navMenu.style.display = navMenu.style.display === 'none' ? 'flex' : 'none';
-                navMenu.style.flexDirection = 'column';
-                navMenu.style.position = 'absolute';
-                navMenu.style.top = '100%';
-                navMenu.style.left = '0';
-                navMenu.style.right = '0';
-                navMenu.style.backgroundColor = 'white';
-                navMenu.style.padding = '1rem';
-                navMenu.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                const isOpen = navMenu.style.display === 'flex';
+                if (isOpen) {
+                    navMenu.style.display = 'none';
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                } else {
+                    Object.assign(navMenu.style, {
+                        display: 'flex',
+                        flexDirection: 'column',
+                        position: 'absolute',
+                        top: '100%',
+                        left: '0',
+                        right: '0',
+                        backgroundColor: 'white',
+                        padding: '1rem 2rem',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                        zIndex: '999'
+                    });
+                    hamburger.innerHTML = '<i class="fas fa-times"></i>';
+                }
+            });
+
+            // Close menu when a nav link is tapped
+            navMenu.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.style.display = 'none';
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                });
             });
         }
+    } else {
+        const hamburger = document.querySelector('.hamburger');
+        if (hamburger) hamburger.remove();
+        navMenu.style.display = '';
     }
 }
 

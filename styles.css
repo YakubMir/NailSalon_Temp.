@@ -915,6 +915,35 @@ p {
 }
 
 /* ============================================
+   HAMBURGER BUTTON
+   ============================================ */
+.hamburger {
+    display: none;
+    background: none;
+    border: 2px solid var(--champagne-gold);
+    border-radius: 8px;
+    color: var(--charcoal-brown);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px 14px;
+    min-width: 52px;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.hamburger:hover {
+    background: rgba(212, 165, 116, 0.1);
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+}
+
+/* ============================================
    RESPONSIVE DESIGN
    ============================================ */
 @media (max-width: 768px) {

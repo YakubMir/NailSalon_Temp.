@@ -1052,6 +1052,14 @@ p {
         padding: 0 16px;
     }
 
+    .logo {
+        order: 2;
+    }
+
+    .hamburger {
+        order: 1;
+    }
+
     .nav-menu {
         display: none;
     }
